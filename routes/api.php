@@ -31,11 +31,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  * deletePerson()
  * generatePDFReport()  - To generate PDF report
  * generateHTMLReport() - To generate HTML report
+ * ------------------------------------------------
  */
 Route::get('/person/all', [PersonController::class, 'getAll']);
 Route::get('/person/get/{id}', [PersonController::class, 'getPersonById']);
 Route::post('/person/add', [PersonController::class, 'postPerson']);
 Route::put('/person/update/{id}', [PersonController::class, 'updatePerson']);
 Route::delete('/person/delete/{id}', [PersonController::class, 'deletePerson']);
+Route::get('/person/count', [PersonController::class, 'getCount']);
 Route::get('/person/report/pdf', [PersonController::class, 'generatePDFReport']);
 Route::get('/person/report/html', [PersonController::class, 'generateHTMLReport']);

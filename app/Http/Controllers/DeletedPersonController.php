@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\DeletedPerson;
+use App\Models\Person;
+use Illuminate\Http\Request;
+
+class DeletedPersonController extends Controller
+{
+    //Insert a deleted person into people table
+    public static function insertDeletedPerson(Person $person_req)
+    {
+        $person = new DeletedPerson();
+        $person->serialno = $person_req->serialno;
+        $person->name = $person_req->name;
+        $person->nic = $person_req->nic;
+        $person->age = $person_req->age;
+        $person->gender = $person_req->gender;
+        $person->address = $person_req->address;
+        $person->phone = $person_req->phone;
+        $person->district = $person_req->district;
+        $person->moh = $person_req->moh;
+        $person->gn = $person_req->gn;
+        $person->important = $person_req->important;
+        return $person->save();
+    }
+}

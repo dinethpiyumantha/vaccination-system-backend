@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeletedPerson;
 use App\Models\Person;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,11 @@ class PersonController extends Controller
         $person->age = $request->input('age');
         $person->gender = $request->input('gender');
         $person->address = $request->input('address');
+        $person->phone = $request->input('phone');
+        $person->district = $request->input('district');
+        $person->moh = $request->input('moh');
+        $person->gn = $request->input('gn');
+        $person->important = $request->input('important');
         $person->save();
         return response()->json(['person' => $person, 'response' => true], 201);
     }
@@ -55,6 +61,11 @@ class PersonController extends Controller
         $person->age = $request->input('age');
         $person->gender = $request->input('gender');
         $person->address = $request->input('address');
+        $person->phone = $request->input('phone');
+        $person->district = $request->input('district');
+        $person->moh = $request->input('moh');
+        $person->gn = $request->input('gn');
+        $person->important = $request->input('important');
         $person->save();
         return response()->json(['person' => $person], 200);
     }
@@ -68,9 +79,10 @@ class PersonController extends Controller
                 "message" => "Person not found !", 404
             ]);
         }
+        $ret = DeletedPersonController::insertDeletedPerson($person);
         $person->delete();
         return response()->json([
-            "message" => "Person `$person->id` deleted !", 201
+            "message" => "Person `$person->id` deleted ! result=`$ret`", 201
         ]);
     }
 
@@ -84,5 +96,10 @@ class PersonController extends Controller
     public function generateHTMLReport()
     {
         return 'HTML Report';
+    }
+
+    public function getCount()
+    {
+        return Person::get()->count();
     }
 }
