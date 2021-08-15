@@ -6,10 +6,9 @@
 
         <title>Laravel</title>
 
-        <!-- Fonts -->
-        <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->
-                <style>
-                    /* cyrillic-ext */
+        <style>
+        /* FONTS */
+        /* cyrillic-ext */
         @font-face {
         font-family: 'Nunito';
         font-style: normal;
@@ -145,135 +144,147 @@
         unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
         
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-
-            #reporttable {
-                font-family: Arial, Helvetica, sans-serif;
-                border-collapse: collapse;
-                font-size: 14px;
-                width: 100%;
-            }
-
-            #reporttable td, #reporttable th {
-                border: 1px solid #ddd;
-                padding: 8px;
-                box-sizing: border-box;
-            }
-
-            #reporttable tr:nth-child(even){
-                background-color: #f2f2f2;
-            }
-
-            #reporttable th {
-                padding-top: 12px;
-                padding-bottom: 12px;
-                text-align: left;
-                background-color: #181818;
-                color: white;
-            }
+        /* STYLES */
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+        #reporttable {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            font-size: 14px;
+            width: 100%;
+        }
+        #reporttable td, #reporttable th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        #reporttable tr:nth-child(even){
+            background-color: #f2f2f2;
+        }
+        #reporttable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #181818;
+            color: white;
+        }
         </style>
     </head>
     <body class="antialiased">
+
+        <!-- Container -->
         <div style="margin: 50px;">
+
+            <!-- Generated Date -->
             <small><span style="color: red;">[ Confidential Report ]</span> <span  style="color: #001529;"><b>Generated at </b>2021/08/10</span></small>
+
+            <!-- Header -->
             <div>
                 <div style="background: #001529; height: 50px; border-radius: 10px; z-index: 100;"></div>
                 <h4 style="color: #bee0ff; line-height: 0px; z-index: 100; margin: -20px 0px 0px 80px;">System C19 Vaccination System for COVID-19</h4>
-                <!-- <img src="{{url('/images/c19.png')}}" alt="Image" style="width: 40px; height: 40px; margin: -25px 0px 0px 10px;"/> -->
-                <!-- <img src="https://cdn.logo.com/hotlink-ok/logo-social-sq.png"src="{{url('/images/c19.png')}}" alt="Image" style="width: 40px; height: 40px; margin: -25px 0px 0px 10px; z-index: 500;"/> -->
                 <img src="https://i.ibb.co/HGpNJxm/c19.png"src="{{url('/images/c19.png')}}" alt="Image" style="width: 40px; height: 40px; margin: -25px 0px 0px 10px; z-index: 500;"/>
-                
             </div> 
+
+            <!-- Report Name -->
             <h2 style="color: #001529; line-height: 1px; margin-top: 50px;">Person Report</h2>
+
+            <!-- Report Description -->
             <p style="text-align: justify; font-size: 12px; color:#495b6e;">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex adipisci deserunt cum tenetur nam ullam, totam placeat perferendis. Et, ab neque sapiente vel sit tenetur facilis iure asperiores debitis, non velit nostrum repellat totam quasi harum eligendi praesentium laborum earum. Voluptatibus sint quos dolores, numquam quis necessitatibus obcaecati a at.
             </p>
+
+            <!-- Registered Persons --------------------------------------------->
             <h3 style="line-height: 1px; margin-top: 40px;">Registered Persons</h3>
-<!-- Tabel 1 -->
-            <table id="reporttable" style="margin-top: 10px;">
-            <tr>
-                <th>Date</th>
-                <th>Amount of Persons</th>
-            </tr>
-            @foreach ($person_dates as $key => $person)
-            <tr>
-                <td>{{$key}}</td>
-                <td>{{count($person)}}</td>
-            </tr>
-            @endforeach
 
+            <!-- Table -->
+            <table id="reporttable" style="margin-top: 10px;">
+                <tr>
+                    <th>Date</th>
+                    <th>Amount of Persons</th>
+                </tr>
+                @foreach ($person_dates as $key => $person)
+                <tr>
+                    <td>{{$key}}</td>
+                    <td>{{count($person)}}</td>
+                </tr>
+                @endforeach
             </table>
 
+            <!-- Deleted Persons --------------------------------------------->
             <h3 style="line-height: 1px; margin-top: 40px;">Deleted Persons</h3>
-<!-- Tabel 2 -->
+
+            <!-- Table  -->
             <table id="reporttable" style="margin-top: 10px;">
-            <tr>
-                <th>Date</th>
-                <th>Amount of Persons</th>
-            </tr>
-            @foreach ($deleted_person_dates as $key => $person)
-            <tr>
-                <td>{{$key}}</td>
-                <td>{{count($person)}}</td>
-            </tr>
-            @endforeach
+                <tr>
+                    <th>Date</th>
+                    <th>Amount of Persons</th>
+                </tr>
+                @foreach ($deleted_person_dates as $key => $person)
+                <tr>
+                    <td>{{$key}}</td>
+                    <td>{{count($person)}}</td>
+                </tr>
+                @endforeach
             </table>
 
+            <!-- Other Details --------------------------------------------->
             <h3 style="line-height: 1px; margin-top: 40px;">Other Details</h3>
-<!-- Tabel 2 -->
+
+            <!-- Tabel -->
             <table id="reporttable" style="margin-top: 10px;">
-            <tr>
-                <th>Description</th>
-                <th>Amount of Persons</th>
-            </tr>
-            <tr><td colspan="2"><b>Registered persons by gender</b></td></tr>
-            @foreach ($person_by_gender as $person)
-            <tr>
-                <td>{{ucfirst($person['gender'])}}</td>
-                <td>{{$person['cnt']}}</td>
-            </tr>
-            @endforeach
-            
-            <tr><td colspan="2"><b>Registered persons by age range</b></td></tr>
-            @foreach ($person_by_age_child as $cp)
-            <tr>
-                <td>Children (00-14 years)</td>
-                <td>{{$cp->cnt}}</td>
-            </tr>
-            @endforeach
-            
+                <tr>
+                    <th>Description</th>
+                    <th>Amount of Persons</th>
+                </tr>
 
-            @foreach ($person_by_age_youth as $cp)
-            <tr>
-                <td>Youth (15-24 years)</td>
-                <td>{{$cp->cnt}}</td>
-            </tr>
-            @endforeach
-            
+                <tr><td colspan="2"><b>Registered persons by gender</b></td></tr>
+                @foreach ($person_by_gender as $person)
+                <tr>
+                    <td>{{ucfirst($person['gender'])}}</td>
+                    <td>{{$person['cnt']}}</td>
+                </tr>
+                @endforeach
+                
+                <tr><td colspan="2"><b>Registered persons by age range</b></td></tr>
+                @foreach ($person_by_age_child as $cp)
+                <tr>
+                    <td>Children (00-14 years)</td>
+                    <td>{{$cp->cnt}}</td>
+                </tr>
+                @endforeach
 
-            @foreach ($person_by_age_adult as $cp)
-            <tr>
-                <td>Adults (25-64 years)</td>
-                <td>{{$cp->cnt}}</td>
-            </tr>
-            @endforeach
-            
-
-            @foreach ($person_by_age_senior as $cp)
-            <tr>
-                <td>Seniors (65 years and over)</td>
-                <td>{{$cp->cnt}}</td>
-            </tr>
-            @endforeach
-            
+                @foreach ($person_by_age_youth as $cp)
+                <tr>
+                    <td>Youth (15-24 years)</td>
+                    <td>{{$cp->cnt}}</td>
+                </tr>
+                @endforeach
+                
+                @foreach ($person_by_age_adult as $cp)
+                <tr>
+                    <td>Adults (25-64 years)</td>
+                    <td>{{$cp->cnt}}</td>
+                </tr>
+                @endforeach
+                
+                @foreach ($person_by_age_senior as $cp)
+                <tr>
+                    <td>Seniors (65 years and over)</td>
+                    <td>{{$cp->cnt}}</td>
+                </tr>
+                @endforeach
             </table>
 
+            <!-- Disclamer -->
             <p style="text-align: justify; font-size: 12px; color:#495b6e; margin-top: 50px;">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex adipisci deserunt cum tenetur nam ullam, totam placeat perferendis. Et, ab neque sapiente vel sit tenetur facilis iure asperiores debitis, non velit nostrum repellat totam quasi harum eligendi praesentium laborum earum. Voluptatibus sint quos dolores, numquam quis necessitatibus obcaecati a at.
             </p>
+
+            <!-- Signature -->
             <p style="margin-top: 80px;">Authorized Signature</p>
+
+            <!-- Footer -->
             <div style="background: #001529; height: 10px;"></div>
             
         </div>

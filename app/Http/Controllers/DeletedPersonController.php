@@ -8,14 +8,22 @@ use Illuminate\Http\Request;
 
 class DeletedPersonController extends Controller
 {
-    //Return all persons as JSON from people table
+
+    /**
+     * Return all persons as JSON from people table
+     * @return json 
+     */
     public function getAll()
     {
         $people = DeletedPerson::all();
         return response()->json(['results' => $people], 200);
     }
 
-    //Insert a deleted person into people table
+    /**
+     * Insert a deleted person into people table
+     * @param Person $person_req get http request with json object
+     * @return boolean 
+     */
     public static function insertDeletedPerson(Person $person_req)
     {
         $person = new DeletedPerson();
