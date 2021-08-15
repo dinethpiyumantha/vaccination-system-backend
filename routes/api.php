@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeletedPersonController;
 use App\Http\Controllers\PersonController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,5 +40,7 @@ Route::post('/person/add', [PersonController::class, 'postPerson']);
 Route::put('/person/update/{id}', [PersonController::class, 'updatePerson']);
 Route::delete('/person/delete/{id}', [PersonController::class, 'deletePerson']);
 Route::get('/person/count', [PersonController::class, 'getCount']);
+Route::get('/person/all/deleted', [DeletedPersonController::class, 'getAll']);
 Route::get('/person/report/pdf', [PersonController::class, 'generatePDFReport']);
 Route::get('/person/report/html', [PersonController::class, 'generateHTMLReport']);
+Route::get('/test', [PersonController::class, 'execTest']);

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeletedPerson;
+use Illuminate\Support\Facades\DB;
 use App\Models\Person;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 /**
  * Author : EKANAYAKA G.M.D.P (IT19955650)
@@ -89,17 +91,79 @@ class PersonController extends Controller
     //Genarate person report - PDF
     public function generatePDFReport()
     {
-        return 'PDF Report';
+        $person_by_gender = Person::selectRaw('`gender`, count(*) AS `cnt`')->groupBy('gender')->orderBy('cnt', 'DESC')->limit(5)->get();
+        $person_by_age_child = DB::select('select count(*) AS `cnt` from `people` where age>= 0 and age<=14');
+        $person_by_age_youth = DB::select('select count(*) AS `cnt` from `people` where age>= 15 and age<=24');
+        $person_by_age_adult = DB::select('select count(*) AS `cnt` from `people` where age>= 25 and age<=64');
+        $person_by_age_senior = DB::select('select count(*) AS `cnt` from `people` where age>= 65');
+        $person_dates = Person::orderBy('created_at')->get()->groupBy(function($item) {
+            return $item->created_at->format('Y-m-d');
+        });
+        $deleted_person_dates = DeletedPerson::orderBy('created_at')->get()->groupBy(function($item) {
+            return $item->created_at->format('Y-m-d');
+        });
+        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('person_report', [
+            'person_by_gender' => $person_by_gender, 
+            'person_by_age_child' => $person_by_age_child,
+            'person_by_age_youth' => $person_by_age_youth,
+            'person_by_age_adult' => $person_by_age_adult,
+            'person_by_age_senior' => $person_by_age_senior,
+            'person_dates' => $person_dates,
+            'deleted_person_dates' => $deleted_person_dates,
+        ]);
+        return $pdf->download('person_report.pdf');
     }
 
     //Genarate person report - HTML
     public function generateHTMLReport()
     {
-        return 'HTML Report';
+        $person_by_gender = Person::selectRaw('`gender`, count(*) AS `cnt`')->groupBy('gender')->orderBy('cnt', 'DESC')->limit(5)->get();
+        $person_by_age_child = DB::select('select count(*) AS `cnt` from `people` where age>= 0 and age<=14');
+        $person_by_age_youth = DB::select('select count(*) AS `cnt` from `people` where age>= 15 and age<=24');
+        $person_by_age_adult = DB::select('select count(*) AS `cnt` from `people` where age>= 25 and age<=64');
+        $person_by_age_senior = DB::select('select count(*) AS `cnt` from `people` where age>= 65');
+        $person_dates = Person::orderBy('created_at')->get()->groupBy(function($item) {
+            return $item->created_at->format('Y-m-d');
+        });
+        $deleted_person_dates = DeletedPerson::orderBy('created_at')->get()->groupBy(function($item) {
+            return $item->created_at->format('Y-m-d');
+        });
+        return view('person_report', [
+            'person_by_gender' => $person_by_gender, 
+            'person_by_age_child' => $person_by_age_child,
+            'person_by_age_youth' => $person_by_age_youth,
+            'person_by_age_adult' => $person_by_age_adult,
+            'person_by_age_senior' => $person_by_age_senior,
+            'person_dates' => $person_dates,
+            'deleted_person_dates' => $deleted_person_dates,
+        ]);
     }
 
     public function getCount()
     {
         return Person::get()->count();
+    }
+    
+    public function execTest()
+    {
+        // return DB::select('select count(*) as `cnt` from `people` where age>= 0 and age<=14');
+        // return DB::select();
+        $person_by_gender = Person::selectRaw('`gender`, count(*) AS `cnt`')->groupBy('gender')->orderBy('cnt', 'DESC')->limit(5)->get();
+        $person_by_age_child = DB::select('select count(*) AS `cnt` from `people` where age>= 0 and age<=14');
+        $person_by_age_youth = DB::select('select count(*) AS `cnt` from `people` where age>= 15 and age<=24');
+        $person_by_age_adult = DB::select('select count(*) AS `cnt` from `people` where age>= 25 and age<=64');
+        $person_by_age_senior = DB::select('select count(*) AS `cnt` from `people` where age>= 65');
+        $person_dates = Person::orderBy('created_at')->get()->groupBy(function($item) {
+            return $item->created_at->format('Y-m-d');
+        });
+        return [
+            'person_by_gender' => $person_by_gender, 
+            'person_by_age_child' => $person_by_age_child,
+            'person_by_age_youth' => $person_by_age_youth,
+            'person_by_age_adult' => $person_by_age_adult,
+            'person_by_age_senior' => $person_by_age_senior,
+            'person_dates' => $person_dates,
+        ];
     }
 }
