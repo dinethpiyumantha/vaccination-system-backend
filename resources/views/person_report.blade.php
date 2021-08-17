@@ -177,7 +177,12 @@
         <div style="margin: 50px;">
 
             <!-- Generated Date -->
-            <small><span style="color: red;">[ Confidential Report ]</span> <span  style="color: #001529;"><b>Generated at </b>2021/08/10</span></small>
+            <small><span style="color: red;">[ Confidential Report ]</span> <span  style="color: #001529;"><b>Generated at </b>
+                @php
+                    date_default_timezone_set("Asia/Colombo");
+                    echo date("Y-m-d h:i:sa");
+                @endphp
+            </span></small>
 
             <!-- Header -->
             <div>
@@ -229,6 +234,7 @@
             </table>
 
             <!-- Other Details --------------------------------------------->
+            <div style="page-break-before: always; margin-top: 50px;"></div>
             <h3 style="line-height: 1px; margin-top: 40px;">Other Details</h3>
 
             <!-- Tabel -->
