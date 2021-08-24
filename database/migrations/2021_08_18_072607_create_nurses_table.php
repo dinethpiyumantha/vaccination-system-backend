@@ -22,14 +22,14 @@ class CreateNursesTable extends Migration
             $table->integer ('age');
             $table->String ('gender');
             $table->String ('phone_no');
-            $table->String ('email');
+            $table->String ('email')->nullable();
             $table->String ('nurse_type');
             $table->String ('working_hospital');
             $table->text ('permanent_address');
             $table->String ('Shift');
             $table->String ('From');
             $table->String ('To');
-            $table->text ('specialNote');
+            $table->text ('specialNote')->nullable();
             $table->timestamps();
         });
     }
