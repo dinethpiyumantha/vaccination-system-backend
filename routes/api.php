@@ -43,3 +43,7 @@ Route::get('/person/report/html', [PersonController::class, 'generateHTMLReport'
 
 //routes of Nurse management section
 Route::get('/nurses/all', [NurseController::class, 'getAll']);
+Route::post('/nurses/add', [NurseController::class, 'addNurse']);
+Route::get('/nurses/get/{id}', [NurseController::class, 'getNurseByID']);
+Route::put('/nurses/update/{id}', [NurseController::class, 'updateNurse']);
+Route::delete('/nurses/delete/{id}', [NurseController::class, 'deleteNurse']);
