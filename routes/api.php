@@ -43,3 +43,5 @@ Route::get('/person/report/html', [PersonController::class, 'generateHTMLReport'
 
 //------------------------------------------------------------
 Route::get('/vaccine/all', [VaccineController::class, 'getAll']);
+Route::get('/vaccine/get/{id}', [VaccineController::class, 'getVaccineById']);
+Route::post('/vaccine/add', [VaccineController::class, 'postVaccine']);
