@@ -10,6 +10,9 @@ class DoctorController extends Controller
 {
     public function getAll()
     {
+        /**
+         * Get all doctors and return as json objects
+         */
         $doctors = Doctor::all();
         return response()->json(['results' => $doctors], 200);
     }
