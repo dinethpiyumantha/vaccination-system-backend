@@ -1,7 +1,8 @@
 <?php
-
+use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\NurseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {  //because of this middleware(api), each route contains 'api' unlike the normal routes
     return $request->user();
 });
 
@@ -46,3 +47,16 @@ Route::get('/doctor/get/{id}', [DoctorController::class, 'getDoctorById']);
 Route::post('/doctor/add', [DoctorController::class, 'postDoctor']);
 Route::put('/doctor/update/{id}', [DoctorController::class, 'updateDoctor']);
 Route::delete('/doctor/delete/{id}', [DoctorController::class, 'deleteDoctor']);
+
+//routes of Nurse management section
+Route::get('/nurses/all', [NurseController::class, 'getAll']);
+Route::post('/nurses/add', [NurseController::class, 'addNurse']);
+Route::get('/nurses/get/{id}', [NurseController::class, 'getNurseByID']);
+Route::put('/nurses/update/{id}', [NurseController::class, 'updateNurse']);
+Route::delete('/nurses/delete/{id}', [NurseController::class, 'deleteNurse']);
+
+//------------------------------------------------------------
+Route::get('/vaccine/all', [VaccineController::class, 'getAll']);
+Route::get('/vaccine/get/{id}', [VaccineController::class, 'getVaccineById']);
+Route::post('/vaccine/add', [VaccineController::class, 'postVaccine']);
+
