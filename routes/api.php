@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\NurseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,12 @@ Route::delete('/person/delete/{id}', [PersonController::class, 'deletePerson']);
 Route::get('/person/report/pdf', [PersonController::class, 'generatePDFReport']);
 Route::get('/person/report/html', [PersonController::class, 'generateHTMLReport']);
 
+Route::get('/doctor/all', [DoctorController::class, 'getAll']);
+Route::get('/doctor/get/{id}', [DoctorController::class, 'getDoctorById']);
+Route::post('/doctor/add', [DoctorController::class, 'postDoctor']);
+Route::put('/doctor/update/{id}', [DoctorController::class, 'updateDoctor']);
+Route::delete('/doctor/delete/{id}', [DoctorController::class, 'deleteDoctor']);
+
 //routes of Nurse management section
 Route::get('/nurses/all', [NurseController::class, 'getAll']);
 Route::post('/nurses/add', [NurseController::class, 'addNurse']);
@@ -52,3 +59,4 @@ Route::delete('/nurses/delete/{id}', [NurseController::class, 'deleteNurse']);
 Route::get('/vaccine/all', [VaccineController::class, 'getAll']);
 Route::get('/vaccine/get/{id}', [VaccineController::class, 'getVaccineById']);
 Route::post('/vaccine/add', [VaccineController::class, 'postVaccine']);
+
