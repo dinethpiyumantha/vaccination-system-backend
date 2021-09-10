@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\DeletedPersonController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\DoctorController;
@@ -26,20 +28,34 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {  //bec
  * ------------------------------------------------
  * PersonControler Methods 
  * ------------------------------------------------
- * getAll()
- * getPersonById()
- * postPerson()
- * updatePerson()
- * deletePerson()
- * generatePDFReport()  - To generate PDF report
- * generateHTMLReport() - To generate HTML report
+ * getAll() @return json response
+ * getPersonById() @return json response
+ * postPerson() @return json response
+ * updatePerson() @return json response
+ * deletePerson() @return json response
+ * getCount() @return integer
+ * generatePDFReport() @return PDF download
+ * generateHTMLReport() @return view (blade file)
+ * ------------------------------------------------
  */
+
+// Get all Persons
 Route::get('/person/all', [PersonController::class, 'getAll']);
+// Get a person by id
 Route::get('/person/get/{id}', [PersonController::class, 'getPersonById']);
+// Insert a person
 Route::post('/person/add', [PersonController::class, 'postPerson']);
+// Update a person by id
 Route::put('/person/update/{id}', [PersonController::class, 'updatePerson']);
+// Delete a person by id
 Route::delete('/person/delete/{id}', [PersonController::class, 'deletePerson']);
+// Count records of all persons
+Route::get('/person/count', [PersonController::class, 'getCount']);
+// Get all deleted persons
+Route::get('/person/all/deleted', [DeletedPersonController::class, 'getAll']);
+// Generate report as pdf
 Route::get('/person/report/pdf', [PersonController::class, 'generatePDFReport']);
+// Generate report view with HTML (blade file)
 Route::get('/person/report/html', [PersonController::class, 'generateHTMLReport']);
 
 Route::get('/doctor/all', [DoctorController::class, 'getAll']);
