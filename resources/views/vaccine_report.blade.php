@@ -182,7 +182,7 @@
                 <img src="https://i.ibb.co/HGpNJxm/c19.png"src="{{url('/images/c19.png')}}" alt="Image" style="width: 40px; height: 40px; margin: -25px 0px 0px 10px; z-index: 500;"/>
 
             </div> 
-            <h2 style="color: #001529; line-height: 1px; margin-top: 50px;">Vaccine Report</h2>
+            <h2 style="color: #001529; line-height: 1px; margin-top: 50px;">Vaccines' Report</h2>
             <p style="text-align: justify; font-size: 12px; color:#495b6e;">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex adipisci deserunt cum tenetur nam ullam, totam placeat perferendis. Et, ab neque sapiente vel sit tenetur facilis iure asperiores debitis, non velit nostrum repellat totam quasi harum eligendi praesentium laborum earum. Voluptatibus sint quos dolores, numquam quis necessitatibus obcaecati a at.
             </p>
@@ -229,7 +229,7 @@
              <table id="reporttable" style="margin-top: 10px;">
                  <tr>
                      <th>Arrival Date</th>
-                     <th>Amount of Vaccines</th>
+                     <th>Amount of Vaccine Stocks</th>
                  </tr>
                  @foreach ($vaccine_by_arrDate as $key => $vaccine)
                  <tr>
@@ -247,7 +247,7 @@
             <table id="reporttable" style="margin-top: 10px;">
                 <tr>
                     <th>Description</th>
-                    <th>Amount of Vaccines</th>
+                    <th>Number of Vaccine Stocks</th>
                 </tr>
 
                 
