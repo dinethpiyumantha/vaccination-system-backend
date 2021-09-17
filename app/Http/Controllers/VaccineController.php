@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Vaccine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 /**
  * Responsible Creator : Hapugala H.A.V.V (IT19974910)
@@ -49,5 +51,60 @@ class VaccineController extends Controller
         $vaccine->save();
         return response()->json(['vaccine' => $vaccine, 'response' => true], 201);
     }
+    public function index()
+    {
+        $vaccine= Vaccine:: latest()->paginate(5);
+
+        return view('vaccine.index',compact('vaccine'))->with(request()->input('page'));
+
+        //table paginate
+    }
+
+       //Genarate vaccine report - PDF
+       public function generatePDFReport()
+       {
+        $vaccine_by_agent = Vaccine::selectRaw('`agent`, count(*) AS `cnt`')->groupBy('agent')->orderBy('cnt', 'DESC')->limit(5)->get();
+        $vaccine_by_smallquantity = DB::select('select count(*) AS `cnt` from `vaccines` where quantity>= 0 and quantity<=30000');
+        $vaccine_by_mediumquantity = DB::select('select count(*) AS `cnt` from `vaccines` where quantity> 30000 and quantity<=100000');
+        $vaccine_by_largequantity = DB::select('select count(*) AS `cnt` from `vaccines` where quantity> 100000');
+        $vaccine_by_arrDate = Vaccine::orderBy('arr_date')->get()->groupBy(function($item) {
+            return $item->arr_date;
+        });
+        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+         $vaccine = Vaccine::latest()->paginate(215);
+         $pdf=PDF::loadview('vaccine_report',[
+            'vaccine_by_agent' => $vaccine_by_agent, 
+            'vaccine_by_smallquantity' => $vaccine_by_smallquantity,
+            'vaccine_by_mediumquantity' => $vaccine_by_mediumquantity,
+            'vaccine_by_largequantity' => $vaccine_by_largequantity,
+            'vaccine_by_arrDate' => $vaccine_by_arrDate,
+
+         ],compact('vaccine'));
+ 
+         //generate pdf
+        return $pdf->download('vaccine_report.pdf');
+       }
+
+
+       public function execTest()
+    {
+       
+        $vaccine_by_agent = Vaccine::selectRaw('`agent`, count(*) AS `cnt`')->groupBy('agent')->orderBy('cnt', 'DESC')->limit(5)->get();
+        $vaccine_by_smallquantity = DB::select('select count(*) AS `cnt` from `vaccines` where quantity>= 0 and quantity<=30000');
+        $vaccine_by_mediumquantity = DB::select('select count(*) AS `cnt` from `vaccines` where quantity> 30000 and quantity<=100000');
+        $vaccine_by_largequantity = DB::select('select count(*) AS `cnt` from `vaccines` where quantity> 100000');
+        $vaccine_by_arrDate = Vaccine::orderBy('arr_date')->get()->groupBy(function($item) {
+            return $item->arr_date;
+        });
+        return [
+  
+            'vaccine_by_agent' => $vaccine_by_agent, 
+            'vaccine_by_smallquantity' => $vaccine_by_smallquantity,
+            'vaccine_by_mediumquantity' => $vaccine_by_mediumquantity,
+            'vaccine_by_largequantity' => $vaccine_by_largequantity,
+            'vaccine_by_arrDate' => $vaccine_by_arrDate,
+        ];
+    } 
+   
 
 }
