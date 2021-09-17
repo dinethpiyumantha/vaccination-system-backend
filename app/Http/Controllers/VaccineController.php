@@ -107,4 +107,18 @@ class VaccineController extends Controller
     } 
    
 
+    //Delete a Vaccien from vaccines table
+    public function deleteVaccine($id) {
+        $vaccine = Vaccine::find($id);
+        if(!$vaccine) {
+            return response()->json([
+                "message"=>"Item not found !", 404 
+            ]);
+        }
+        $vaccine->delete();
+        return response()->json([
+            "message"=>"Vaccine `$vaccine->id` Deleted !", 201
+        ]);
+    }
+
 }

@@ -46,3 +46,4 @@ Route::get('/vaccine/all', [VaccineController::class, 'getAll']);
 Route::get('/vaccine/get/{id}', [VaccineController::class, 'getVaccineById']);
 Route::post('/vaccine/add', [VaccineController::class, 'postVaccine']);
 Route::get('/vaccine/report/pdf', [VaccineController::class, 'generatePDFReport']);
+Route::delete('/vaccine/delete/{id}', [VaccineController::class, 'deleteVaccine']);
