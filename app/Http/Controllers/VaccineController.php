@@ -121,4 +121,28 @@ class VaccineController extends Controller
         ]);
     }
 
+
+    //Update a vaccine in Vaccines table
+    public function updateVaccine(Request $request, $id) {
+        $vaccine = Vaccine::find($id);
+        if(!$vaccine){
+            return response()->json(['message'=>"Vaccine not found"],404);
+        }
+        $vaccine->stockno = $request->input('stockno');
+        $vaccine->name = $request->input('name');
+        $vaccine->country = $request->input('country');
+        $vaccine->agent = $request->input('agent');
+        $vaccine->quantity = $request->input('quantity');
+        $vaccine->arr_date = $request->input('arr_date');
+        $vaccine->mfd = $request->input('mfd');
+        $vaccine->exp = $request->input('exp');
+        $vaccine->lab = $request->input('lab');
+        $vaccine->lab_contact = $request->input('lab_contact');
+        $vaccine->description = $request->input('description');
+        $vaccine->save();
+        return response()->json(['vaccine'=>$vaccine],200);
+    }
+
+
+
 }
