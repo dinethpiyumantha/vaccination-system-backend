@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nurse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class NurseController extends Controller
 {
@@ -88,6 +91,35 @@ class NurseController extends Controller
                 "message" => "Nurse not found!", 404
             ]);
         }
+    }
+
+    public function generatePDFReport()
+    {
+        //retreive all records from db
+        // $nurses = Nurse::all();
+        $nurse_by_gender = Nurse::selectRaw('`gender`, count(*) AS `cnt`')->groupBy('gender')->orderBy('cnt', 'DESC')->limit(5)->get();
+        //$nurse_by_age_young = DB::select('select count(*) AS `cnt` from `nurses` where age>= 30 and age<=60');
+        $nurse_by_trainee = DB::select('select count(*) AS `cnt` from `nurses` where nurse_type="Trainee"');
+        $nurse_by_volunteering = DB::select('select count(*) AS `cnt` from `nurses` where nurse_type="Volunteering"');
+        $nurse_by_fulltime = DB::select('select count(*) AS `cnt` from `nurses` where nurse_type="Full-time"');
+        $nurse_by_senior = DB::select('select count(*) AS `cnt` from `nurses` where nurse_type="Senior_Nurse"');
+
+        //return response()->json(['results' => $nurse_by_gender], 200);
+
+        //share data to view
+        //view()->share('nurses', $nurses);
+        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $nurses = Nurse::latest()->paginate(215);
+        $pdf = PDF::loadView('nurse_report', [
+            'nurse_by_gender' => $nurse_by_gender,
+            'nurse_by_trainee' => $nurse_by_trainee,
+            'nurse_by_volunteering' => $nurse_by_volunteering,
+            'nurse_by_fulltime' => $nurse_by_fulltime,
+            'nurse_by_senior' => $nurse_by_senior,
+        ], compact('nurses'));
+
+        //download PDF file with download method
+        return $pdf->download('nurse_report.pdf');
     }
 
 }
