@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\NurseController;
 use Illuminate\Http\Request;
@@ -48,3 +48,8 @@ Route::get('/nurses/get/{id}', [NurseController::class, 'getNurseByID']);
 Route::put('/nurses/update/{id}', [NurseController::class, 'updateNurse']);
 Route::delete('/nurses/delete/{id}', [NurseController::class, 'deleteNurse']);
 Route::get('/nurses/report/pdf', [NurseController::class, 'generatePDFReport']);
+
+//------------------------------------------------------------
+Route::get('/vaccine/all', [VaccineController::class, 'getAll']);
+Route::get('/vaccine/get/{id}', [VaccineController::class, 'getVaccineById']);
+Route::post('/vaccine/add', [VaccineController::class, 'postVaccine']);
