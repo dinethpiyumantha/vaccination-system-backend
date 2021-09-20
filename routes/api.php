@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\DeletedPersonController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\PersonVaccineController;
+use App\Http\Controllers\VaccineController;
+use App\Models\PersonVaccine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,3 +57,6 @@ Route::get('/person/all/deleted', [DeletedPersonController::class, 'getAll']);
 Route::get('/person/report/pdf', [PersonController::class, 'generatePDFReport']);
 // Generate report view with HTML (blade file)
 Route::get('/person/report/html', [PersonController::class, 'generateHTMLReport']);
+// Get all person details with vaccination details
+Route::get('/person-vaccine/all/{id}', [PersonVaccineController::class, 'getByNIC']);
+// Get vaccine details by person details

@@ -15,9 +15,9 @@ class CreatePeopleTable extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->id();
-            $table->string('serialno');
+            $table->string('serialno')->unique();
             $table->string('name');
-            $table->string('nic');
+            $table->string('nic')->unique();
             $table->integer('age');
             $table->string('gender');
             $table->string('address');
