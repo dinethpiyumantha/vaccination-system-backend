@@ -2,6 +2,7 @@
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\NurseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,16 @@ Route::get('/doctor/get/{id}', [DoctorController::class, 'getDoctorById']);
 Route::post('/doctor/add', [DoctorController::class, 'postDoctor']);
 Route::put('/doctor/update/{id}', [DoctorController::class, 'updateDoctor']);
 Route::delete('/doctor/delete/{id}', [DoctorController::class, 'deleteDoctor']);
+// Generate report as pdf
+Route::get('/doctor/report/pdf', [DoctorController::class, 'generatePDFReport']);
+// Generate report view with HTML (blade file)
+Route::get('/doctor/report/html', [DoctorController::class, 'generateHTMLReport']);
+
+Route::get('/appointment/all', [AppointmentController::class, 'getAll']);
+Route::get('/appointment/get/{id}', [AppointmentController::class, 'getAppointmentById']);
+Route::post('/appointment/add', [AppointmentController::class, 'postAppointment']);
+Route::put('/appointment/update/{id}', [AppointmentController::class, 'updateAppointment']);
+Route::delete('/appointment/delete/{id}', [AppointmentController::class, 'deleteAppointment']);
 
 //routes of Nurse management section
 Route::get('/nurses/all', [NurseController::class, 'getAll']);
