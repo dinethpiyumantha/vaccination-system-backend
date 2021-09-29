@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +49,7 @@ Route::post('/vaccine/add', [VaccineController::class, 'postVaccine']);
 Route::get('/vaccine/report/pdf', [VaccineController::class, 'generatePDFReport']);
 Route::delete('/vaccine/delete/{id}', [VaccineController::class, 'deleteVaccine']);
 Route::put('/vaccine/update/{id}', [VaccineController::class, 'updateVaccine']);
+
+
+//------------------------------------------------------------
+Route::post('/admin/add', [AdminController::class, 'postAdmin']);
