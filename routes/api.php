@@ -3,6 +3,7 @@
 use App\Http\Controllers\DeletedPersonController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\NurseController;
 use Illuminate\Http\Request;
@@ -75,4 +76,9 @@ Route::delete('/nurses/delete/{id}', [NurseController::class, 'deleteNurse']);
 Route::get('/vaccine/all', [VaccineController::class, 'getAll']);
 Route::get('/vaccine/get/{id}', [VaccineController::class, 'getVaccineById']);
 Route::post('/vaccine/add', [VaccineController::class, 'postVaccine']);
+Route::get('/vaccine/report/pdf', [VaccineController::class, 'generatePDFReport']);
+Route::delete('/vaccine/delete/{id}', [VaccineController::class, 'deleteVaccine']);
+Route::put('/vaccine/update/{id}', [VaccineController::class, 'updateVaccine']);
 
+//------------------------------------------------------------
+Route::post('/admin/add', [AdminController::class, 'postAdmin']);
