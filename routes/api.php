@@ -71,6 +71,7 @@ Route::post('/nurses/add', [NurseController::class, 'addNurse']);
 Route::get('/nurses/get/{id}', [NurseController::class, 'getNurseByID']);
 Route::put('/nurses/update/{id}', [NurseController::class, 'updateNurse']);
 Route::delete('/nurses/delete/{id}', [NurseController::class, 'deleteNurse']);
+Route::get('/nurses/report/pdf', [NurseController::class, 'generatePDFReport']);
 
 //------------------------------------------------------------
 Route::get('/vaccine/all', [VaccineController::class, 'getAll']);
