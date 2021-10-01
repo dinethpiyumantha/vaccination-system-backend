@@ -18,7 +18,7 @@ class CreatePersonVaccinesTable extends Migration
             $table->string('vaccine');
             $table->timestamps();
 
-            $table->foreign('person_id')->references('id')->on('people');
+            $table->foreign('person_id')->references('id')->on('people')->onDelete('cascade')->onUpdate('cascade');;
         });
     }
 
