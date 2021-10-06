@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -40,5 +41,14 @@ class AdminController extends Controller
         $admin->pwd2 = $request->input('pwd2');
         $admin->save();
         return response()->json(['admin' => $admin, 'response' => true], 201);
+    }
+
+    public function loginValidator(Request $request) {
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        $response = DB::select("SELECT * FROM admins WHERE userId='".$username."' AND pwd1='".$password."'");
+
+        return response()->json($response, 200);
     }
 }

@@ -87,3 +87,4 @@ Route::put('/vaccine/update/{id}', [VaccineController::class, 'updateVaccine']);
 
 //------------------------------------------------------------
 Route::post('/admin/add', [AdminController::class, 'postAdmin']);
+Route::post('/uservalidate', [AdminController::class, 'loginValidator']);
